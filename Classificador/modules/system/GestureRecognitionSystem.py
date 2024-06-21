@@ -139,6 +139,7 @@ class GestureRecognitionSystem:
         t_frame = self.time_functions.tic()
         while self.loop:
             if self.time_functions.toc(t_frame) > (1 / self.fps):
+                print(f"FPS: {1 / self.time_functions.toc(t_frame):.3f} and Time per frame: {self.time_functions.toc(t_frame):.3f}")
                 t_frame = self.time_functions.tic()
                 
                 if cv2.waitKey(10) & 0xFF == ord("q"):
@@ -303,7 +304,7 @@ class GestureRecognitionSystem:
             # trigger starts and the gesture begins.
             _, self.hand_history, self.dist_virtual_point = self.gesture_analyzer.check_trigger_enabled(self.hand_history, self.sample['par_trigger_length'], self.sample['par_trigger_dist'])
             if self.dist_virtual_point < self.sample['par_trigger_dist']:
-                self.stage = 0
+                self.stage = 1
                 self.dist_virtual_point = 1
                 self.time_gesture = self.time_functions.tic()
                 self.time_action = self.time_functions.tic()
